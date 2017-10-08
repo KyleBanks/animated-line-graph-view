@@ -6,8 +6,6 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.os.Build;
-import android.support.annotation.ColorRes;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.LinearLayout;
@@ -50,12 +48,12 @@ public class AnimatedLineGraphView extends LinearLayout {
         init();
     }
 
-    public AnimatedLineGraphView(Context context, @Nullable AttributeSet attrs) {
+    public AnimatedLineGraphView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public AnimatedLineGraphView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public AnimatedLineGraphView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
@@ -144,7 +142,7 @@ public class AnimatedLineGraphView extends LinearLayout {
      *
      * @param lineColor
      */
-    public void setLineColor(@ColorRes int lineColor) {
+    public void setLineColor(int lineColor) {
         this.linePaint.setColor(getResources().getColor(lineColor));
     }
 
@@ -153,7 +151,7 @@ public class AnimatedLineGraphView extends LinearLayout {
      *
      * @param circleColor
      */
-    public void setCircleColor(@ColorRes int circleColor) {
+    public void setCircleColor(int circleColor) {
         this.circlePaint.setColor(getResources().getColor(circleColor));
     }
 
