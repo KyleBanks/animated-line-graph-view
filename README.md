@@ -2,6 +2,10 @@
 
 An animated Line Graph view for Android.
 
+## Demo
+
+There is a demo project in the [demo/](./demo) directory, with sample code in [MainActivity.java](./demo/app/src/main/java/co/blankkeys/algvdemo/MainActivity.java) and [activity_main.xml](./demo/app/src/main/res/layout/activity_main.xml).
+
 ## Installation
 
 In your project `build.gradle` add the [jitpack.io](https://jitpack.io/) repository:
