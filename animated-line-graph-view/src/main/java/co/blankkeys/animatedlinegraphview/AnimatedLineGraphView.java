@@ -2,12 +2,15 @@ package co.blankkeys.animatedlinegraphview;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 /**
@@ -19,14 +22,14 @@ public class AnimatedLineGraphView extends LinearLayout {
 
     private static final String TAG = AnimatedLineGraphView.class.getSimpleName();
 
-    private static final long DEFAULT_ANIMATION_DURATION_MS = 900;
+    private static final int DEFAULT_ANIMATION_DURATION_MS = 900;
     private static final int DEFAULT_LINE_THICKNESS = 15;
     private static final int DEFAULT_CIRCLE_RADIUS = 20;
     private static final float DEFAULT_GRAPH_PADDING_PCT = 0.02f;
     private static final int DEFAULT_LINE_COLOR = android.R.color.black;
     private static final int DEFAULT_CIRCLE_COLOR = android.R.color.black;
 
-    private long animationDuration;
+    private int animationDuration;
     private int circleRadius;
     private float paddingPercent;
 
@@ -45,23 +48,23 @@ public class AnimatedLineGraphView extends LinearLayout {
 
     public AnimatedLineGraphView(Context context) {
         super(context);
-        init();
+        init(null);
     }
 
     public AnimatedLineGraphView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init();
+        init(attrs);
     }
 
     public AnimatedLineGraphView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init();
+        init(attrs);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public AnimatedLineGraphView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        init();
+        init(attrs);
     }
 
     /**
@@ -79,7 +82,7 @@ public class AnimatedLineGraphView extends LinearLayout {
      *
      * @return
      */
-    public long getAnimationDuration() {
+    public int getAnimationDuration() {
         return animationDuration;
     }
 
@@ -88,7 +91,7 @@ public class AnimatedLineGraphView extends LinearLayout {
      *
      * @param animationDuration
      */
-    public void setAnimationDuration(long animationDuration) {
+    public void setAnimationDuration(int animationDuration) {
         this.animationDuration = animationDuration;
     }
 
@@ -155,24 +158,44 @@ public class AnimatedLineGraphView extends LinearLayout {
         this.circlePaint.setColor(getResources().getColor(circleColor));
     }
 
-    private void init() {
+    private void init(AttributeSet attrs) {
         Log.i(TAG, "init()");
         setWillNotDraw(false);
 
-        setAnimationDuration(DEFAULT_ANIMATION_DURATION_MS);
-        setPaddingPercent(DEFAULT_GRAPH_PADDING_PCT);
-
         linePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         linePaint.setStyle(Paint.Style.STROKE);
-        setLineColor(DEFAULT_LINE_COLOR);
-        setLineThickness(DEFAULT_LINE_THICKNESS);
-
         circlePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         circlePaint.setStyle(Paint.Style.FILL_AND_STROKE);
+        path = new Path();
+
+        if (attrs == null) {
+            setDefaults();
+            return;
+        }
+
+        TypedArray attributes = getContext().getTheme().obtainStyledAttributes(attrs, R.styleable.AnimatedLineGraphView, 0, 0);
+        try {
+            setAnimationDuration(attributes.getInt(R.styleable.AnimatedLineGraphView_duration, DEFAULT_ANIMATION_DURATION_MS));
+            setPaddingPercent(attributes.getFloat(R.styleable.AnimatedLineGraphView_paddingPercent, DEFAULT_GRAPH_PADDING_PCT));
+            setLineColor(attributes.getResourceId(R.styleable.AnimatedLineGraphView_lineColor, DEFAULT_LINE_COLOR));
+            setLineThickness(attributes.getInt(R.styleable.AnimatedLineGraphView_lineThickness, DEFAULT_LINE_THICKNESS));
+            setCircleColor(attributes.getResourceId(R.styleable.AnimatedLineGraphView_circleColor, DEFAULT_CIRCLE_COLOR));
+            setCircleRadius(attributes.getInt(R.styleable.AnimatedLineGraphView_circleRadius, DEFAULT_CIRCLE_RADIUS));
+        } catch (Exception ex) {
+            Log.e(TAG, "Failed to parse attributes due to: " + ex.getMessage());
+            ex.printStackTrace();
+        } finally {
+            attributes.recycle();
+        }
+    }
+
+    private void setDefaults() {
+        setAnimationDuration(DEFAULT_ANIMATION_DURATION_MS);
+        setPaddingPercent(DEFAULT_GRAPH_PADDING_PCT);
+        setLineColor(DEFAULT_LINE_COLOR);
+        setLineThickness(DEFAULT_LINE_THICKNESS);
         setCircleColor(DEFAULT_CIRCLE_COLOR);
         setCircleRadius(DEFAULT_CIRCLE_RADIUS);
-
-        path = new Path();
     }
 
     private void reset() {

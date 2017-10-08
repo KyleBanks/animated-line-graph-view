@@ -1,0 +1,3 @@
+include ':app', ':animated-line-graph-view'
+
+project(':animated-line-graph-view').projectDir = new File(settingsDir, '../animated-line-graph-view')

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="AnimatedLineGraphView">
+        <attr name="duration" format="integer"/>
+        <attr name="lineThickness" format="integer"/>
+        <attr name="circleRadius" format="integer"/>
+        <attr name="paddingPercent" format="float"/>
+        <attr name="lineColor" format="reference"/>
+        <attr name="circleColor" format="reference"/>
+    </declare-styleable>
+
+</resources>
