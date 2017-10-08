@@ -1,3 +1,1 @@
 include ':animated-line-graph-view'
-
-rootProject.name = 'animated-line-graph-view'
