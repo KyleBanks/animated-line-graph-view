@@ -1,14 +1,14 @@
 # animated-line-graph-view
 
-An animated Line Graph view for Android.
+An animated line graph for Android.
 
-## Demo
+# Example
 
-This is an example of `AnimatedLineGraphView` being used as a background for a stocks app.
+Here is an example of `AnimatedLineGraphView` being used as a background for a stocks app. The stock information is loaded and the `AnimatedLineGraphView` animates into place behind the main stock details:
 
 ![AnimatedLineGraphView Stocks example](./example.gif)
 
-There is a demo project in the [demo](./demo) directory, with sample code in [MainActivity.java](./demo/app/src/main/java/co/blankkeys/algvdemo/MainActivity.java) and [activity_main.xml](./demo/app/src/main/res/layout/activity_main.xml).
+There is also a demo project in the [demo](./demo) directory, with sample code in [MainActivity.java](./demo/app/src/main/java/co/blankkeys/algvdemo/MainActivity.java) and [activity_main.xml](./demo/app/src/main/res/layout/activity_main.xml).
 
 ## Installation
 
