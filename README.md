@@ -27,7 +27,7 @@ And in your application `build.gradle` add the `animated-line-graph-view` depend
 ```
 dependencies {
     ...
-    compile 'com.github.KyleBanks:animated-line-graph-view:v1.0.0'
+    compile 'com.github.KyleBanks:animated-line-graph-view:v1.0.1'
 }
 ```
 
